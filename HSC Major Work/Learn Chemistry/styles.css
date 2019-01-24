@@ -1,0 +1,295 @@
+body {    
+    margin: 0;
+    padding: 0; 
+    background-color: white;
+    font-family: 'Nunito', sans-serif;
+}
+
+.settingsbutton{ /* Settings button at top right*/
+    background-color: black; 
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 3vw;
+    width: 20vw;
+    height:8%;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+
+.settingsbutton:active{
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.settingsbutton:hover{
+    background-color: #23272a; /* Green */
+}
+
+
+
+#SettingsContent{
+    display: none;
+}
+
+#SettingsModalTitle{
+    border-bottom: ridge;
+    font-size: 3vw;
+}
+
+.SettingsText{ 
+    font-size: 40;
+    margin-left: 50px;
+    float:left;
+    margin-top: 20px;
+    width:100px;
+}
+
+
+.SettingsOptions{ /* The buttons in the settings modal*/
+    background-color: #134a7b;
+    margin-left: 100px;
+    margin-top: 20px;
+    float:left;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 3vw;
+    width: 20vw;
+    height:8%;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+     border-radius: 5px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.SettingsOptions:hover{
+    background-color: #0e3b63;
+}
+
+.SettingsOptions:active{
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+
+.initiatebutton{ /* buttons for loading each section modal */
+    width: 100%;
+    height: 15%;
+    background-color: #134a7b;
+    font-size:2.5vw;
+    color:white;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.initiatebutton:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.initiatebutton:hover{
+    background-color: #0e3b63; /* Green */
+}
+
+
+
+
+
+#titlebox{ /* title of each column */
+	float: left;
+	width: 80vw;
+	height:8%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: auto;  
+    font-size: 3.5vw;
+    color:white;
+    background-color:#4c4c4c;
+}
+
+
+
+#column1{
+    font-size:2vw;
+	text-align: center;
+	margin-left: 5%;
+	height:46%;
+	float: left; 
+	width: 30vw;
+	border-style: ridge;
+    border-width: 0px;
+    color:black;
+    line-height: 1.6;
+}
+
+#column2{
+    font-size:2vw;
+    text-align: center;
+    line-height: 1.6;
+	float:left;
+	height:46%;
+	width: 30vw;
+	border-style: ridge;
+    border-width: 0px;
+}
+
+#column3{
+    font-size:2vw;
+    text-align: center;
+    line-height: 1.6;
+    float:left;
+    height:46%;
+    width: 30vw;
+    border-style: ridge;
+    border-width: 0px;
+}
+
+#column4{
+    font-size:2vw;
+    text-align: center;
+    margin-left: 5%;
+    height:46%;
+    float: left; 
+    width: 30vw;
+    border-style: ridge;
+    border-width: 0px;
+    color:black;
+    line-height: 1.6;
+}
+
+#column5{
+    font-size:2vw;
+    text-align: center;
+    line-height: 1.6;
+    float:left;
+    height:46%;
+    width: 30vw;
+    border-style: ridge;
+    border-width: 0px;
+}
+
+#column6{
+    font-size:2vw;
+    text-align: center;
+    line-height: 1.6;
+    float:left;
+    height:46%;
+    width: 30vw;
+    border-style: ridge;
+    border-width: 0px;
+}
+
+#columntitle{
+	font-size: 2vw;
+	width: 100%;
+	height:15%;
+	border-bottom-style: ridge;
+	border-bottom-width:1px;
+    line-height: 4vw;
+}
+
+.Choices{ /* each choice in the modal under the questions */
+    display: block;
+    margin-top: 3.5vw;
+    font-size:1.1vw;
+}
+
+.CorrectMessage{
+    display: none;
+    margin-top: 1vw;
+    font-size: 1.1vw;
+}
+
+.IncorrectMessage{
+    display: none;
+    margin-top: 1vw;
+    font-size: 1.1vw;
+}
+
+.Solution{
+    font-size:1.1vw;
+    float:left;
+    border: 2px solid black;
+    border-radius:2px;
+    display: none;
+    margin-top: 1vw;
+    width:60vw;
+    height:4vw;
+    vertical-align: middle;
+}
+
+.ModalTitle{
+    border-bottom: ridge;
+    font-size: 3vw;
+}
+
+.Questions{
+    font-size: 1.5vw;
+    margin-top:3.5vw;
+}
+
+.modalcontent{
+    display: none;
+}
+
+.choicebutton { /* choice buttons */
+    background-color: #134a7b; 
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1vw;
+    width: 15vw;
+    height:5vh;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+}
+
+.choicebutton:hover{
+    background-color: green; 
+}
+
+.choicebutton:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+.next{ /* buttons for getting to next step of solution */
+    font-size: 16;
+    margin-top:1vw;
+    background-color: #696969; 
+    color: white;
+    width: 12vw;
+    height:4vw;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    float:left;
+    margin-left:10px;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+}
+
+.next:hover{
+    background-color: #2c2f33; 
+}
+
+.next:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+
+
+

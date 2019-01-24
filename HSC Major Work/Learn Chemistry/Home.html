@@ -1,0 +1,332 @@
+<html>
+<head>
+	<title>Learn Chemistry</title>
+	<link rel = "stylesheet"
+  	 type = "text/css"
+	 href = "styles.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="tingle.css">
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+<script src="tingle.js"></script>
+<meta charset="UTF-8">
+
+<body>
+<div class="tingle-content-wrapper">
+	<body style="background-color:"white">
+
+<div id="titlebox">Learn Chemistry</div>
+
+
+
+
+
+<button onclick="SettingsModal.open()" class="settingsbutton">Settings</button>
+<div id= "SettingsContent">
+	<div id="SettingsModalTitle"">Settings</div>
+	<div id="Progress" class = "SettingsText">Progress: </div>
+	<button onclick="Settings.ResetProgress()" class="SettingsOptions">Reset</button>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div id="Theme" class = "SettingsText">Font:</div>
+	<button onclick="Settings.changeFont('Normal')" class="SettingsOptions">Normal</button>
+	<button onclick="Settings.changeFont('Large')" class="SettingsOptions">Large</button>
+
+
+
+</div>
+
+
+
+
+
+<div id="column1" class = "column">
+<button onclick="AtomicMass.Initiate()" class="initiatebutton">Atomic Mass</button>
+	<div id = "aMassAnswered">0 questions answered</div>
+	<div id = "aMassCorrect">0 questions correct</div>
+	<div id= "aMassIncorrect">0 questions incorrect</div>
+	<div id="aMassPercentage">0% correct answers</div> 
+</div>
+
+<div id="AtomicMassContent" class = "modalcontent">
+	<div id="AtomicMassModalTitle" class = "ModalTitle">Atomic Mass</div>
+	<div id="AtomicMassQuestion" class = "Questions"></div>
+
+<div id="Choices_1" class="Choices">	
+	<button id="1_1" class="choicebutton" onclick="AtomicMass.chooseAnswer(1)"></button>
+	<button id="2_1" class="choicebutton" onclick="AtomicMass.chooseAnswer(2)"></button>
+	<button id="3_1" class="choicebutton" onclick="AtomicMass.chooseAnswer(3)"></button>
+	<button id="4_1" class="choicebutton" onclick="AtomicMass.chooseAnswer(4)"></button>
+</div>	
+
+
+
+<div id="CorrectMessage_1" class="CorrectMessage">That is correct. Your next question will be loaded shortly</div>	
+<div id="IncorrectMessage_1" class="IncorrectMessage" onclick="AtomicMass.aMassStep1()">That is incorrect. Please try another answer. Alternatively click this text for the solution</div>
+
+<div id="Solution1_1" class="Solution" onclick="AtomicMass.aMassStep2()"></div>
+<button id="Next1_1" class="Next" onclick="AtomicMass.aMassStep2()">Next Step <br> (1/2)</button>
+
+<div id="Solution2_1" class="Solution"></div>		
+<button id="Next2_1" class="Next" onclick="AtomicMass.aMassStep2()">That is all <br> (2/2)</button>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="column2" class = "column">
+<button onclick="Electrochemistry.Initiate()" class="initiatebutton">Electrochemistry</button>
+	<div id = "ElectrochemistryAnswered">0 questions answered</div>
+	<div id = "ElectrochemistryCorrect">0 questions correct</div>
+	<div id = "ElectrochemistryIncorrect">0 questions incorrect</div>
+	<div id = "ElectrochemistryPercentage">0% correct answers</div>
+</div>
+
+<div id="ElectrochemistryContent" class = "modalcontent">
+	<div id="ElectrochemistryTitle" class = "ModalTitle">Electrochemistry</div>
+	<div id="ElectrochemistryQuestion" class = "Questions"></div>
+
+<div id="Choices_2" class="Choices">	
+	<button id="1_2" class="choicebutton" onclick="Electrochemistry.chooseAnswer(1)"></button>
+	<button id="2_2" class="choicebutton" onclick="Electrochemistry.chooseAnswer(2)"></button>
+	<button id="3_2" class="choicebutton" onclick="Electrochemistry.chooseAnswer(3)"></button>
+	<button id="4_2" class="choicebutton" onclick="Electrochemistry.chooseAnswer(4)"></button>
+</div>	
+
+
+<div id="CorrectMessage_2" class="CorrectMessage" >That is correct. Your next question will be loaded shortly</div>	
+<div id="IncorrectMessage_2" class="IncorrectMessage" onclick="Electrochemistry.electroChemstep1()">That is incorrect. Please try another answer. Alternatively click this text for the solution</div>
+
+<div id="Solution1_2" class="Solution "></div>
+<button id="Next1_2" class="Next" onclick="Electrochemistry.electroChemstep2()">Next Step <br> (1/4)</button>
+
+
+<div id="Solution2_2" class="Solution"></div>	
+<button id="Next2_2" class="Next" onclick="Electrochemistry.electroChemstep3()">Next Step <br> (2/4)</button>
+
+
+<div id="Solution3_2" class="Solution"></div>			
+<button id="Next3_2" class="Next" onclick="Electrochemistry.electroChemstep4()">Next Step <br> (3/4)</button>
+
+
+<div id="Solution4_2" class="Solution"></div>			
+<button id="Next4_2" class="Next"">That is all <br> (4/4)</button>
+	
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="column3" class = "column">
+	<button onclick="HalfLife.Initiate()" class="initiatebutton">Half Life</button>
+	<div id = "HalfLifeAnswered">0 questions answered</div>
+	<div id = "HalfLifeCorrect">0 questions correct</div>
+	<div id = "HalfLifeIncorrect">0 questions incorrect</div>
+	<div id = "HalfLifePercentage">0% correct answers</div>
+</div>
+
+<div id="HalfLifeContent" class = "modalcontent">
+	<div id="HalfLifeModalTitle" class = "ModalTitle">Half Life</div>
+	<div id="HalfLifeQuestions" class = "Questions"></div>
+
+<div id="Choices_3" class = "Choices">	
+	<button id="1_3" class="choicebutton" onclick="HalfLife.chooseAnswer(1)"></button>
+	<button id="2_3" class="choicebutton" onclick="HalfLife.chooseAnswer(2)"></button>
+	<button id="3_3" class="choicebutton" onclick="HalfLife.chooseAnswer(3)"></button>
+	<button id="4_3" class="choicebutton" onclick="HalfLife.chooseAnswer(4)"></button>
+</div>	
+
+<div id="IncorrectMessage_3" onclick="HalfLife.HalfLifeStep1()" class="IncorrectMessage">That is incorrect. Please try another answer. Alternatively click this text for the solution</div>
+<div id="CorrectMessage_3"  class="CorrectMessage">That is correct. Your next question will be loaded shortly</div>	
+
+<div id="Solution1_3" class="Solution"></div>
+<button id="Next1_3" class="Next" onclick="HalfLife.HalfLifeStep2()">Next <br> (1/2)</button>
+
+<div id="Solution2_3" class="Solution"></div>	
+<button id="Next2_3" class="Next">That is all <br> (2/2)</button>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<div id="column4" class = "column">
+	<button onclick="Stoichiometry.Initiate()" class="initiatebutton">Stoichiometry</button>
+	<div id = "StoichiometryAnswered">0 questions answered</div>
+	<div id = "StoichiometryCorrect">0 questions correct</div>
+	<div id = "StoichiometryIncorrect">0 questions incorrect</div>
+	<div id = "StoichiometryPercentage">0% correct answers</div>
+</div>
+
+
+<div id="StoichiometryContent" class = "modalcontent">
+	<div id="StoichiometryModaltitle" class = "ModalTitle">Stoichiometry</div>
+	<div id="StoichiometryQuestions" class = "Questions"></div>
+
+<div id="Choices_3" class = "Choices">	
+	<button id="1_4" class="choicebutton" onclick="Stoichiometry.chooseAnswer(1)"></button>
+	<button id="2_4" class="choicebutton" onclick="Stoichiometry.chooseAnswer(2)"></button>
+	<button id="3_4" class="choicebutton" onclick="Stoichiometry.chooseAnswer(3)"></button>
+	<button id="4_4" class="choicebutton" onclick="Stoichiometry.chooseAnswer(4)"></button>
+</div>	
+
+<div id="IncorrectMessage_4" onclick="Stoichiometry.StoichiometryStep1()" class="IncorrectMessage">That is incorrect. Please try another answer. Alternatively click this text for the solution</div>
+<div id="CorrectMessage_4"  class="CorrectMessage">That is correct. Your next question will be loaded shortly</div>
+
+<div id="Solution1_4" class="Solution"></div>
+<button id="Next1_4" class="Next" onclick="Stoichiometry.StoichiometryStep2()">Next <br> (1/3)</button>
+
+<div id="Solution2_4" class="Solution"></div>
+<button id="Next2_4" class="Next" onclick="Stoichiometry.StoichiometryStep3()">Next <br> (2/3)</button>
+
+<div id="Solution3_4" class="Solution"></div>
+<button id="Next3_4" class="Next">That is all <br> (3/3)</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="column5" class = "column">
+	<button onclick="Energy.Initiate()" class="initiatebutton">Energy</button>
+	<div id = "EnergyAnswered">0 questions answered</div>
+	<div id = "EnergyCorrect">0 questions correct</div>
+	<div id= "EnergyIncorrect">0 questions incorrect</div>
+	<div id="EnergyPercentage">0% correct answers</div> 
+</div>
+
+<div id="EnergyContent" class = "modalcontent">
+	<div id="EnergyModalTitle" class = "ModalTitle">Energy</div>
+	<div id="EnergyQuestions" class = "Questions"></div>
+
+<div id="Choices_3" class = "Choices">	
+	<button id="1_5" class="choicebutton" onclick="Energy.chooseAnswer(1)"></button>
+	<button id="2_5" class="choicebutton" onclick="Energy.chooseAnswer(2)"></button>
+	<button id="3_5" class="choicebutton" onclick="Energy.chooseAnswer(3)"></button>
+	<button id="4_5" class="choicebutton" onclick="Energy.chooseAnswer(4)"></button>
+</div>	
+
+<div id="IncorrectMessage_5" onclick="Energy.EnergyStep1()" class="IncorrectMessage">That is incorrect. Please try another answer. Alternatively click this text for the solution</div>
+<div id="CorrectMessage_5" class="CorrectMessage">That is correct. Your next question will be loaded shortly</div>
+
+<div id="Solution1_5" class="Solution"></div>
+<button id="Next1_5" class="Next" onclick="Energy.EnergyStep2()">Next <br> (1/2)</button>
+
+<div id="Solution2_5" class="Solution"></div>
+<button id="Next2_5" class="Next" onclick="Energy.EnergyStep3()">Next <br> (2/4)</button>
+
+<div id="Solution3_5" class="Solution"></div>
+<button id="Next3_5" class="Next" onclick="Energy.EnergyStep4()">Next <br> (3/4)</button>
+
+<div id="Solution4_5" class="Solution"></div>
+<button id="Next4_5" class="Next" onclick="Energy.EnergyStep4()">That's all <br> (4/4)</button>
+
+</div>
+
+
+
+
+
+
+
+<div id="column6" class = "column">
+	<button onclick="pH.Initiate()" class="initiatebutton">pH</button>
+	<div id = "pHAnswered">0 questions answered</div>
+	<div id = "pHCorrect">0 questions correct</div>
+	<div id= "pHIncorrect">0 questions incorrect</div>
+	<div id="pHPercentage">0% correct answers</div> 
+</div>
+
+<div id="pHContent" class = "modalcontent">
+	<div id="pHModalTitle" class = "ModalTitle">pH</div>
+	<div id="pHQuestions" class = "Questions"></div>
+
+<div id="Choices_3" class = "Choices">	
+	<button id="1_6" class="choicebutton" onclick="pH.chooseAnswer(1)"></button>
+	<button id="2_6" class="choicebutton" onclick="pH.chooseAnswer(2)"></button>
+	<button id="3_6" class="choicebutton" onclick="pH.chooseAnswer(3)"></button>
+	<button id="4_6" class="choicebutton" onclick="pH.chooseAnswer(4)"></button>
+</div>	
+
+<div id="IncorrectMessage_6" onclick="pH.pHStep1()" class="IncorrectMessage">That is incorrect. Please try another answer. Alternatively click this text for the solution</div>
+<div id="CorrectMessage_6"  class="CorrectMessage">That is correct. Your next question will be loaded shortly</div>
+
+<div id="Solution1_6" class="Solution"></div>
+<button id="Next1_6" class="Next" onclick="pH.pHStep2()">Next <br> (1/2)</button>
+
+<div id="Solution2_6" class="Solution"></div>
+<button id="Next2_6" class="Next" onclick="pH.pHStep3()">Next <br> (2/4)</button>
+
+<div id="Solution3_6" class="Solution"></div>
+<button id="Next3_6" class="Next" onclick="pH.pHStep4()">Next <br> (3/4)</button>
+
+<div id="Solution4_6" class="Solution"></div>
+<button id="Next4_6" class="Next">That's all <br> (4/4)</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+</body>
+
+
+
+<script src = "Settings.js"></script>
+<script src="Data Sheet.js"></script>
+<script src="AtomicMass.js"></script>
+<script src="ElectroChemistry.js"></script>
+<script src="Half Life.js"></script>
+<script src="Stoichiometry.js"></script>
+<script src="Energy.js"></script>
+<script src="pH.js"></script>
+
+
+</html>
+

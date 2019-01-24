@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Term 3 Group Task</title>
+    <style>
+    	* { padding: 0; margin: 0; }
+    	canvas { background: #eee; display: block; margin: 0 auto; }
+    </style>
+</head>
+<link rel = "stylesheet"
+          type = "text/css"
+          href = Home.css /> <!-- import css file: mainly to stylise range sliders -->
+<body>
+
+<div id="canvas"> <!-- Generate canvas and set background to BG.jpg -->
+<canvas id="myCanvas" width="1440" height="768" style="background: url('BG.jpg')"></canvas>
+</div>
+
+<div id="button1"> <!--generate left range slider -->
+<input type="range" id="gravityRange" value="150" max="300" min ="0">
+<button onclick="gravityadjust()">Adjust Gravity</button>
+<p id="gravityadjust"></p>
+</div>
+
+<div id="button2"> <!-- Generate right range slider -->
+<input type="range" id="targetRange" value="50" max="200" min ="1">
+<button onclick="targetsize()">Adjust Target Size</button>
+<p id="targetsize"></p>
+</div>
+
+<!-- import all tank images-->
+
+<div style="display:none;">
+  <img id="source1" src="TANKresized.png"
+       width="147" height="67">
+</div>
+<div style="display:none;">
+  <img id="source2" src="TANKresized2.png"
+       width="150" height="70">
+</div>
+<div style="display:none;">
+  <img id="source3" src="TANKresized3.png"
+       width="158" height="83">
+</div>
+<div style="display:none;">
+  <img id="source4" src="TANKresized4.png"
+       width="175" height="119">
+</div>
+<div style="display:none;">
+  <img id="source5" src="TANKresized5.png"
+       width="148" height="120">
+</div>
+<div style="display:none;">
+  <img id="source6" src="TANKresized6.png"
+       width="133" height="128">
+</div>
+
+<!-- ^end tank images^ -->
+ 
+<script> 
+// all variables
+var image1 = document.getElementById('source1');
+var image2 = document.getElementById('source2');
+var image3 = document.getElementById('source3');
+var image4 = document.getElementById('source4');
+var image5 = document.getElementById('source5');
+var image6 = document.getElementById('source6');
+var canvasheight = 768;
+var canvaswidth = 1440;
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var tankHeight = 67;
+var tankWidth = 147;
+var tankX = (canvas.width-tankWidth)/10;
+var projectile = {
+	x: (tankX) + 147, // left + right
+	y: canvasheight-tankHeight + 10, // up + down
+	speed: 180, 
+	angle: 0, 
+	time: 0,
+	gravity: 100, 
+}
+var rightPressed = false;
+var leftPressed = false;
+var spacePressed = false;
+var upPressed = false;
+var downPressed = false;
+var zPressed = false;
+var xPressed = false;
+
+var target = {
+	x: canvaswidth - 25, // left + right
+	y: canvasheight/2, // up + down
+	height: 50,
+	dy: 5,
+}
+
+var score = 0;
+var automode = 0;
+// ^end variables^
+
+
+document.addEventListener("keydown", keyDownHandler, false); // keydown listener
+document.addEventListener("keyup", keyUpHandler, false); // keyup listener
+
+function gravityadjust() { // return value of left range slider and set gravity
+    var gravityadjust = document.getElementById("gravityRange").value;
+    document.getElementById("gravityadjust").innerHTML = gravityadjust;
+    projectile.gravity = gravityadjust;
+
+}
+
+function targetsize() { // return value of right range slider and set gravity
+    var targetsize = document.getElementById("targetRange").value;
+    document.getElementById("targetsize").innerHTML = targetsize;
+    target.height = targetsize;
+
+}
+
+function keyDownHandler(e) { // variables for all necessary keys for when key is pressed
+    if(e.keyCode == 39) {
+        rightPressed = true;
+    }
+    if(e.keyCode == 37) {
+        leftPressed = true;
+    }
+    if(e.keyCode == 32){
+    	spacePressed = true;
+    }
+    if(e.keyCode == 38){
+    	upPressed = true;
+    }
+    if(e.keyCode == 40){
+    	downPressed = true;
+    }
+    if(e.keyCode == 90){
+    	zPressed = true;
+    } 
+     if(e.keyCode == 88){
+    	xPressed = true;
+    }
+
+}
+function keyUpHandler(e) { // variabls for all necessary keys set for when key isn't pressed 
+    if(e.keyCode == 39) {
+        rightPressed = false;
+    }
+    if(e.keyCode == 37) {
+        leftPressed = false;
+    }
+    if(e.keyCode == 32){
+    	spacePressed = false;
+    }
+    if(e.keyCode == 38){
+    	upPressed = false;
+    }
+    if(e.keyCode == 40){
+    	downPressed = false;
+    }
+    if(e.keyCode == 90){
+    	zPressed = false;
+    }
+    if(e.keyCode == 88){
+    	xPressed = false;
+    }
+}
+
+function drawTank() { // draw tank: change image depending on angle 
+	if(projectile.angle >= 0 && projectile.angle <= 14){
+		ctx.drawImage(image1,tankX,canvas.height-tankHeight);
+}
+	if(projectile.angle >= 15 && projectile.angle <= 29){
+		ctx.drawImage(image2,tankX,canvas.height-tankHeight-4);
+	}
+
+	if(projectile.angle >= 30 && projectile.angle <= 44){
+		ctx.drawImage(image3,tankX,canvas.height-tankHeight-16);
+	}
+	if(projectile.angle >= 45 && projectile.angle <= 59){
+		ctx.drawImage(image4,tankX-9,canvas.height-tankHeight-52);
+	}
+	if(projectile.angle >= 60 && projectile.angle <= 74){
+		ctx.drawImage(image5,tankX,canvas.height-tankHeight-53);
+	}
+	if(projectile.angle >= 75 && projectile.angle <=90){
+		ctx.drawImage(image6,tankX,canvas.height-tankHeight-61);
+	}
+}
+
+function drawProjectile(){ // draw projectile
+
+	// work out the new position of the ball
+	x = projectile.x + projectile.speed * Math.cos(projectile.angle * Math.PI/180) * projectile.time ; //Velocity * cos(angle) * time + initialX
+	y = projectile.speed * Math.sin(projectile.angle * Math.PI/180) * projectile.time - (projectile.gravity * Math.pow(projectile.time,2) / 2); //Velocity * sin(ballangle) * (time) - (gravity * time^2)
+	y = projectile.y - y; // y = iy - y: initial y - above calculated y (so the shot actually starts from the tank)
+    
+	
+	ctx.beginPath(); // draw the ball to the above determined ositions
+	ctx.arc(x, y, 5, 0, Math.PI*2);
+	ctx.fillStyle ="#ff0000" ;
+	ctx.fill();
+	ctx.closePath();
+
+	projectile.time += 0.05; // incriment time (this is used to figure out the position of the ball)
+
+	if(spacePressed == true) { // listen for space key press and reshoot projectile 
+		if(y > 768 || y <0 && x > 158 || x < 0){ // only only shooting when previous projectile is off screen
+			if(projectile.angle >= 0 && projectile.angle <= 14){ // change the starting position of projectile depending on angle
+				projectile.x = (tankX) + 147;
+				projectile.y = canvasheight-tankHeight + 10;
+				projectile.time = 0;
+			}	
+			if(projectile.angle >= 15 && projectile.angle <= 29){// change the starting position of projectile depending on angle
+				projectile.x = (tankX) + 147;
+				projectile.y = canvasheight-tankHeight + 6;
+				projectile.time = 0;
+			}
+			if(projectile.angle >= 30 && projectile.angle <= 44){// change the starting position of projectile depending on angle
+				projectile.x = (tankX) + 147;
+				projectile.y = canvasheight-tankHeight - 8 ;
+				projectile.time = 0;
+			}	
+			if(projectile.angle >= 45 && projectile.angle <= 59){// change the starting position of projectile depending on angle
+				projectile.x = (tankX) + 145;
+				projectile.y = canvasheight-tankHeight - 32 ;
+				projectile.time = 0;
+			}	
+			if(projectile.angle >= 60 && projectile.angle <= 75){// change the starting position of projectile depending on angle
+				projectile.x = (tankX) + 116;
+				projectile.y = canvasheight-tankHeight -45 ;
+				projectile.time = 0;
+			}	
+			if(projectile.angle >= 75 && projectile.angle <= 90){// change the starting position of projectile depending on angle
+				projectile.x = (tankX) + 88;
+				projectile.y = canvasheight-tankHeight -45 ;
+				projectile.time = 0;
+			}				
+ 		}
+ 	}
+
+}        
+
+function velocity() { // changing velocity depending on z and x key press
+	if(zPressed && projectile.speed > 0){
+		if(y > 768 || y <0 && x > 158 || x < 0){
+    		projectile.speed -= 1;	
+    	}
+    }
+    if(xPressed && projectile.speed < 500){
+    	if(y > 768 || y <0 && x > 158 || x < 0){
+    		projectile.speed += 1;	
+    	}
+    }
+
+}
+
+function angle() { // changing angle depending on up and down key press
+	if(upPressed && projectile.angle < 90){
+    	if(y > 768 || y <0 && x > 158 || x < 0){
+    		projectile.angle += 1;
+    	}
+    }
+
+    if(downPressed && projectile.angle > 0 ){
+    	if(y > 768 || y <0 && x > 158 || x < 0){
+    		projectile.angle -= 1;
+    	}
+    }
+}
+
+function drawTarget(){ // drawing shooting target 
+	ctx.beginPath();
+    ctx.rect(target.x, target.y, 25, target.height);
+    ctx.fillStyle = "#0000FF";
+    ctx.fill();
+    ctx.closePath();
+    target.y = target.y + target.dy;
+
+    if(target.y + target.dy > canvasheight - target.height){ // once target reaches top, make it go down
+    	target.dy = -target.dy
+    }
+    if(target.y + target.dy < 0){ // once target reaches bottom, make it go up
+    	target.dy = -target.dy
+    }
+
+    //collision detection
+    if(x < canvaswidth && x > canvaswidth-25){ // when projectile reaches end of canvas 
+    if(y >= target.y && y < +target.y + +target.height){ // when projectile touches between the top and bottom of target
+    	score += 1;
+    }
+}
+ 
+}
+ 
+function draw() { // clearing of previous frames, drawing of tank, projectile, and target
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	drawTank(); 
+	drawProjectile(); 
+	drawTarget();
+	if(rightPressed && tankX < canvas.width-tankWidth) { // move tank right on right press
+        tankX += 1;
+    }
+    if(leftPressed && tankX> 0) { // move tank left on lef tpresses
+        tankX -= 1;
+    }
+
+    	ctx.font = "40px Arial"; // score display
+	ctx.fillText("Score: " + score,canvaswidth - 200,50);
+	ctx.closePath();
+
+	ctx.font = "18px Arial"; // velocity display 
+	ctx.fillStyle = "#2F4F4F";
+	ctx.fillText("Velocity: " + projectile.speed, canvaswidth - 200,75);
+	ctx.closePath();
+
+	ctx.font = "18px Arial"; // angle display
+	ctx.fillStyle = "#2F4F4F";
+	ctx.fillText("Angle: " + projectile.angle, canvaswidth - 200,100);
+	ctx.closePath();
+
+	ctx.font = "40px Arial"; // instructions 1 
+	ctx.fillStyle = "#ff0000";
+	ctx.fillText("Instructions", 15 ,50);
+	ctx.closePath();
+
+
+	ctx.font = "12px Arial"; // instructions 2
+	ctx.fillStyle = "#2F4F4F";
+	ctx.fillText("Use the ‘up’ and ‘down’ arrows to change the angle of the turret.", 15 ,70);
+	ctx.closePath();
+
+	ctx.font = "12px Arial"; // instructions 3
+	ctx.fillStyle = "#2F4F4F";
+	ctx.fillText("Use ‘x’ and ‘z’ keys to change the velocity of the projectile.", 15 ,90);
+	ctx.closePath();
+ 
+	ctx.font = "12px Arial"; // instructions 4
+	ctx.fillStyle = "#2F4F4F";
+	ctx.fillText("Slide the right slider, then click ‘Adjust gravity’ to alter gravity settings", 15 ,110);
+	ctx.closePath();
+
+	ctx.font = "12px Arial"; // instructions 5
+	ctx.fillStyle = "#2F4F4F";
+	ctx.fillText("Slide the left slider, then click ‘Adjust target size’ to alter target size", 15 ,130);
+	ctx.closePath();
+
+
+}
+
+setInterval(draw, 10); // run the draw function every 10 milliseconds 
+setInterval(angle, 30); // run the angle function every 30 milliseconds 
+setInterval(velocity, 15); // run the velocity function every 15 milliseconds
+
+
+
+
+ 
+
+</script>
+
+</body>
+</html>
